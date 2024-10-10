@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завантаження інструкції</title>
+    <style>
+        /* Встановлення зображення на задній фон */
+        body {
+            background-image: url('https://steamuserimages-a.akamaihd.net/ugc/911288247978088119/E78823E87E3623D1D11593B0C3C12607C94CC5A3/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false');
+            background-size: cover; /* Зображення покриває весь фон */
+            background-size: 100% 100%; /* Зображення займає 100% ширини та висоти */
+            background-position: center; /* Центрування зображення */
+            background-repeat: no-repeat; /* Запобігає повторенню зображення */
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Займає всю висоту екрану */
+            overflow: hidden; /* Вимикаємо прокрутку */
+            font-family: Arial, sans-serif;
+        }
+
+        /* Стиль для форми */
+        #downloadForm {
+            background: rgba(255, 255, 255, 0.8); /* Напівпрозорий білий фон для читабельності */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: 50px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Завантаження інструкції</h2>
+
+    <form id="downloadForm">
+        <label for="username">Введіть свій логін:</label>
+        <input type="text" id="username" name="Юра Воловік" required>
+        <br><br>
+
+        <label for="instruction">Виберіть інструкцію:</label>
+        <select id="instruction" name="instruction" required>
+            <option value="" disabled selected>Виберіть інструкцію</option>
+            <option value="https://docs.google.com/document/d/166s5CFJHI_KaDZkbvzBdp9PNbR20QN5Oqcry3ztPEfE/edit?tab=t.0">Проблемні ШК</option>
+            <option value="https://docs.google.com/document/d/166s5CFJHI_KaDZkbvzBdp9PNbR20QN5Oqcry3ztPEfE/edit?tab=t.0">Уніформа</option>
+            <option value="https://docs.google.com/document/d/1qnWmJOxXAbLWVZKySfCSpyIetMFFL84dnGnXW4EiCQY/edit?tab=t.0">Правила роботи РЦ з магазинами</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Завантажити інструкцію</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('downloadForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const username = document.getElementById('username').value.trim();
+                const instructionUrl = document.getElementById('instruction').value;
+
+                // Перевірка, чи логін відповідає "Юра Воловік"
+                if (username !== "Юра Воловік") {
+                    alert('Ви не маєте доступу до завантаження. Доступ дозволено лише для Юра Воловік.');
+                    return;
+                }
+
+                if (!instructionUrl) {
+                    alert('Будь ласка, виберіть інструкцію для завантаження.');
+                    return;
+                }
+
+                // Якщо логін правильний, виконуємо завантаження
+                downloadFile(instructionUrl);
+            });
+        });
+
+        function downloadFile(url) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = '';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            alert('Завантаження інструкції розпочато.');
+        }
+    </script>
+</html>
